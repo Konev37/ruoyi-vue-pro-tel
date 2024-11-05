@@ -101,17 +101,18 @@ public class TenantSecurityWebFilter extends ApiRequestFilter {
     }
 
     private boolean isIgnoreUrl(HttpServletRequest request) {
-        // 快速匹配，保证性能
-        if (CollUtil.contains(tenantProperties.getIgnoreUrls(), request.getRequestURI())) {
-            return true;
-        }
-        // 逐个 Ant 路径匹配
-        for (String url : tenantProperties.getIgnoreUrls()) {
-            if (pathMatcher.match(url, request.getRequestURI())) {
-                return true;
-            }
-        }
-        return false;
+//        // 快速匹配，保证性能
+//        if (CollUtil.contains(tenantProperties.getIgnoreUrls(), request.getRequestURI())) {
+//            return true;
+//        }
+//        // 逐个 Ant 路径匹配
+//        for (String url : tenantProperties.getIgnoreUrls()) {
+//            if (pathMatcher.match(url, request.getRequestURI())) {
+//                return true;
+//            }
+//        }
+//        return false;
+        return true;
     }
 
 }
