@@ -78,8 +78,26 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
         return selectOne(new QueryWrapper<T>().eq(field, value));
     }
 
+
+    /**
+     * 这个方法 `selectOne` 是一个泛型方法，用于根据指定的字段和值从数据库中查询单个记录。
+     * 它使用 MyBatis Plus 提供的 `LambdaQueryWrapper` 来构建查询条件。
+     *
+     * - `SFunction<T, ?> field`：这是一个函数式接口，表示要查询的字段。
+     * - `Object value`：这是字段对应的值。
+     *
+     * 方法内部使用 `LambdaQueryWrapper` 的 `eq` 方法来构建等值查询条件，并调用 `selectOne` 方法执行查询，返回匹配的单个记录。
+     */
     default T selectOne(SFunction<T, ?> field, Object value) {
         return selectOne(new LambdaQueryWrapper<T>().eq(field, value));
+        /*
+         `LambdaQueryWrapper` 的 `eq` 方法用于构建等值查询条件。
+         它会生成一个 SQL 语句中的 `WHERE` 子句，用于指定某个字段的值必须等于给定的值。
+         */
+        /*
+        `selectOne` 方法用于根据指定的字段和值从数据库中查询单个记录。
+        它使用 MyBatis Plus 提供的 `LambdaQueryWrapper` 或 `QueryWrapper` 来构建查询条件，并执行查询，返回匹配的单个记录。
+        */
     }
 
     default T selectOne(String field1, Object value1, String field2, Object value2) {

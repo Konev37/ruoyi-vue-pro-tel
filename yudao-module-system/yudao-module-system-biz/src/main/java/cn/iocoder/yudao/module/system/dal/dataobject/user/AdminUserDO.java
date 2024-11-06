@@ -22,6 +22,14 @@ import java.util.Set;
 @TableName(value = "system_users", autoResultMap = true) // 由于 SQL Server 的 system_user 是关键字，所以使用 system_users
 @KeySequence("system_users_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
 @Data
+//@Data 注解是 Lombok 库中的一个注解。它的作用是自动生成以下常用方法：
+//
+//- getter 和 setter 方法
+//- toString() 方法
+//- equals() 和 hashCode() 方法
+//- requiredArgsConstructor 方法
+//
+//使用 `@Data` 注解可以减少样板代码的编写，提高开发效率。
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @NoArgsConstructor

@@ -63,10 +63,13 @@ public class AuthController {
     private SecurityProperties securityProperties;
 
     @PostMapping("/login")
-    @PermitAll
+    @PermitAll    //指定该方法可以被所有用户访问，而不需要提供任何形式的认证或授权信息，
     @Operation(summary = "使用账号密码登录")
     public CommonResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO) {
-        return success(authService.login(reqVO));
+//        return success(authService.login(reqVO));
+        AuthLoginRespVO authLoginRespVO = authService.login(reqVO);
+        CommonResult<AuthLoginRespVO> res = success(authLoginRespVO);
+        return res;
     }
 
     @PostMapping("/logout")
