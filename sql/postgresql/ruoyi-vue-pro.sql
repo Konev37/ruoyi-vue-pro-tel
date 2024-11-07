@@ -2510,6 +2510,7 @@ CREATE TABLE system_oauth2_access_token
     user_type     int2         NOT NULL,
     user_info     varchar(512) NOT NULL,
     access_token  varchar(255) NOT NULL,
+    jwt_token     varchar(255) NOT NULL,
     refresh_token varchar(32)  NOT NULL,
     client_id     varchar(255) NOT NULL,
     scopes        varchar(255) NULL     DEFAULT NULL,
@@ -2533,6 +2534,7 @@ COMMENT ON COLUMN system_oauth2_access_token.user_id IS '用户编号';
 COMMENT ON COLUMN system_oauth2_access_token.user_type IS '用户类型';
 COMMENT ON COLUMN system_oauth2_access_token.user_info IS '用户信息';
 COMMENT ON COLUMN system_oauth2_access_token.access_token IS '访问令牌';
+COMMENT ON COLUMN system_oauth2_access_token.jwt_token IS 'Jwt令牌';
 COMMENT ON COLUMN system_oauth2_access_token.refresh_token IS '刷新令牌';
 COMMENT ON COLUMN system_oauth2_access_token.client_id IS '客户端编号';
 COMMENT ON COLUMN system_oauth2_access_token.scopes IS '授权范围';

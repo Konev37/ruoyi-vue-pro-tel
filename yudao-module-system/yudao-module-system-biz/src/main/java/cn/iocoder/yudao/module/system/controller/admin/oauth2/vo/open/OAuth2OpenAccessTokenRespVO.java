@@ -16,6 +16,10 @@ public class OAuth2OpenAccessTokenRespVO {
     @JsonProperty("access_token")
     private String accessToken;
 
+    @Schema(description = "Jwt令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "code")
+    @JsonProperty("jwt_token")
+    private String jwtToken;
+
     @Schema(description = "刷新令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "nice")
     @JsonProperty("refresh_token")
     private String refreshToken;

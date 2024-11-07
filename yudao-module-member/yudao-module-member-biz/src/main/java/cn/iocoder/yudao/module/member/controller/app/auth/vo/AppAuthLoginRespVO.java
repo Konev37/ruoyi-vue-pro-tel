@@ -21,6 +21,9 @@ public class AppAuthLoginRespVO {
     @Schema(description = "访问令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "happy")
     private String accessToken;
 
+    @Schema(description = "Jwt令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "code")
+    private String jwtToken;
+
     @Schema(description = "刷新令牌", requiredMode = Schema.RequiredMode.REQUIRED, example = "nice")
     private String refreshToken;
 

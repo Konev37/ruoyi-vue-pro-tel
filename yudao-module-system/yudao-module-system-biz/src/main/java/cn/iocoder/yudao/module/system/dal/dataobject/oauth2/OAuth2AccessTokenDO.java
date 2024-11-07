@@ -38,6 +38,10 @@ public class OAuth2AccessTokenDO extends TenantBaseDO {
      */
     private String accessToken;
     /**
+     * Jwt令牌
+     */
+    private String jwtToken;
+    /**
      * 刷新令牌
      */
     private String refreshToken;

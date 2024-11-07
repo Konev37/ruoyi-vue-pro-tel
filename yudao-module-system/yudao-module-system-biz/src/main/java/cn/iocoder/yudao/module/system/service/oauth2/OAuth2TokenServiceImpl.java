@@ -22,6 +22,9 @@ import cn.iocoder.yudao.module.system.dal.mysql.oauth2.OAuth2AccessTokenMapper;
 import cn.iocoder.yudao.module.system.dal.mysql.oauth2.OAuth2RefreshTokenMapper;
 import cn.iocoder.yudao.module.system.dal.redis.oauth2.OAuth2AccessTokenRedisDAO;
 import cn.iocoder.yudao.module.system.service.user.AdminUserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +51,9 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     private OAuth2AccessTokenMapper oauth2AccessTokenMapper;
     @Resource
     private OAuth2RefreshTokenMapper oauth2RefreshTokenMapper;
-
+    // Jwt令牌秘钥
+    @Value("abcdefghijklmnopqrstuvwxyz")
+    private String secret;
     @Resource
     private OAuth2AccessTokenRedisDAO oauth2AccessTokenRedisDAO;
 
@@ -63,8 +69,10 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
         OAuth2ClientDO clientDO = oauth2ClientService.validOAuthClientFromCache(clientId);
         // 创建刷新令牌
         OAuth2RefreshTokenDO refreshTokenDO = createOAuth2RefreshToken(userId, userType, clientDO, scopes);
+        // 创建jwt令牌
+        String jwtToken = createJwtToken();
         // 创建访问令牌
-        return createOAuth2AccessToken(refreshTokenDO, clientDO);
+        return createOAuth2AccessToken(jwtToken, refreshTokenDO, clientDO);
     }
 
     @Override
@@ -95,8 +103,11 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
             throw exception0(GlobalErrorCodeConstants.UNAUTHORIZED.getCode(), "刷新令牌已过期");
         }
 
+        // 创建jwt令牌
+        String jwtToken = createJwtToken();
+
         // 创建访问令牌
-        return createOAuth2AccessToken(refreshTokenDO, clientDO);
+        return createOAuth2AccessToken(jwtToken, refreshTokenDO, clientDO);
     }
 
     @Override
@@ -158,8 +169,9 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
         return oauth2AccessTokenMapper.selectPage(reqVO);
     }
 
-    private OAuth2AccessTokenDO createOAuth2AccessToken(OAuth2RefreshTokenDO refreshTokenDO, OAuth2ClientDO clientDO) {
+    private OAuth2AccessTokenDO createOAuth2AccessToken(String jwtToken, OAuth2RefreshTokenDO refreshTokenDO, OAuth2ClientDO clientDO) {
         OAuth2AccessTokenDO accessTokenDO = new OAuth2AccessTokenDO().setAccessToken(generateAccessToken())
+                .setJwtToken(jwtToken)
                 .setUserId(refreshTokenDO.getUserId()).setUserType(refreshTokenDO.getUserType())
                 .setUserInfo(buildUserInfo(refreshTokenDO.getUserId(), refreshTokenDO.getUserType()))
                 .setClientId(clientDO.getClientId()).setScopes(refreshTokenDO.getScopes())
@@ -170,6 +182,15 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
         // 记录到 Redis 中
         oauth2AccessTokenRedisDAO.set(accessTokenDO);
         return accessTokenDO;
+    }
+
+    private String createJwtToken() {
+        String jwtTokenUUID = generateJwtToken();
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("login_user_jwt_key", jwtTokenUUID);
+        return Jwts.builder()
+                .setClaims(claims)
+                .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     private OAuth2RefreshTokenDO createOAuth2RefreshToken(Long userId, Integer userType, OAuth2ClientDO clientDO, List<String> scopes) {
@@ -209,6 +230,10 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     }
 
     private static String generateAccessToken() {
+        return IdUtil.fastSimpleUUID();
+    }
+
+    private static String generateJwtToken() {
         return IdUtil.fastSimpleUUID();
     }
 
