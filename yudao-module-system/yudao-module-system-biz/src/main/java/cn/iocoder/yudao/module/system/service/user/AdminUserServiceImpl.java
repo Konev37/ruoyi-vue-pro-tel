@@ -91,12 +91,12 @@ public class AdminUserServiceImpl implements AdminUserService {
             success = SYSTEM_USER_CREATE_SUCCESS)
     public Long createUser(UserSaveReqVO createReqVO) {
         // 1.1 校验账户配合
-        tenantService.handleTenantInfo(tenant -> {
-            long count = userMapper.selectCount();
-            if (count >= tenant.getAccountCount()) {
-                throw exception(USER_COUNT_MAX, tenant.getAccountCount());
-            }
-        });
+//        tenantService.handleTenantInfo(tenant -> {
+//            long count = userMapper.selectCount();
+//            if (count >= tenant.getAccountCount()) {
+//                throw exception(USER_COUNT_MAX, tenant.getAccountCount());
+//            }
+//        });
         // 1.2 校验正确性
         validateUserForCreateOrUpdate(null, createReqVO.getUsername(),
                 createReqVO.getMobile(), createReqVO.getEmail(), createReqVO.getDeptId(), createReqVO.getPostIds());
