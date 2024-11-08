@@ -30,12 +30,12 @@ public class PayAppBaseVO {
     @Schema(description = "备注", example = "我是一个测试应用")
     private String remark;
 
-    @Schema(description = "支付结果的回调地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48080/pay-callback")
+    @Schema(description = "支付结果的回调地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48088/pay-callback")
     @NotNull(message = "支付结果的回调地址不能为空")
     @URL(message = "支付结果的回调地址必须为 URL 格式")
     private String orderNotifyUrl;
 
-    @Schema(description = "退款结果的回调地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48080/refund-callback")
+    @Schema(description = "退款结果的回调地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "http://127.0.0.1:48088/refund-callback")
     @NotNull(message = "退款结果的回调地址不能为空")
     @URL(message = "退款结果的回调地址必须为 URL 格式")
     private String refundNotifyUrl;
