@@ -13,6 +13,10 @@ import java.util.List;
 @Mapper
 public interface AdminUserMapper extends BaseMapperX<AdminUserDO> {
 
+    default AdminUserDO selectById(Long id) {
+        return selectOne(AdminUserDO::getId, id);
+    }
+
     default AdminUserDO selectByUsername(String username) {
         return selectOne(AdminUserDO::getUsername, username);
     }

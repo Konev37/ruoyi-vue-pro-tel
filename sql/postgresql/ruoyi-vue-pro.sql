@@ -1541,6 +1541,9 @@ COMMENT ON TABLE system_menu IS '菜单权限表';
 BEGIN;
 INSERT INTO system_menu VALUES (10001, '人员管理', 'system:user:list', 2, 0, 0, '/collector', 'ep:avatar', 'infrastructure/collectors/index', 'Collectors');
 INSERT INTO system_menu VALUES (10002, '区域管理', 'system:user:list', 2, 0, 0, '/area', 'fa:map-marker', 'infrastructure/area/index', 'Area');
+INSERT INTO system_menu VALUES (10003, '基础设施管理', '', 2, 0, 0, '/base', 'ep:grid', 'infrastructure/base/index', 'Base');
+INSERT INTO system_menu VALUES (10004, '消防栓管理', '', 2, 0, 0, '/fire', 'fa-solid:fire-extinguisher', 'infrastructure/fire/index', 'Fire');
+INSERT INTO system_menu VALUES (10005, '垃圾桶管理', '', 2, 0, 0, '/trash', 'fa-solid:trash-alt', 'infrastructure/trash/index', 'Trash');
 
 INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, component_name, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES (1, '系统管理', '', 1, 10, 0, '/system', 'ep:tools', NULL, NULL, 0, '1', '1', '1', 'admin', '2021-01-05 17:03:48', '1', '2024-02-29 01:04:23', '0');
 INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, component_name, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES (2, '基础设施', '', 1, 20, 0, '/infra', 'ep:monitor', NULL, NULL, 0, '1', '1', '1', 'admin', '2021-01-05 17:03:48', '1', '2024-03-01 08:28:40', '0');
@@ -4455,12 +4458,12 @@ COMMENT ON TABLE system_users IS '用户信息表';
 -- ----------------------------
 -- @formatter:off
 BEGIN;
-INSERT INTO system_users VALUES (137, 'chenwb1', '$2a$04$lVzasMd4WxqFdeY2U125/uZTfrJcZSLCxlgLJD/Mvg32hA3A.1XVu', 'c1', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:20:21.530376', '1', '2024-11-08 23:20:21.530376', 0, 0);
-INSERT INTO system_users VALUES (138, 'chenwb2', '$2a$04$RXZ0vGXYl52Vg4z.QyS8c.JizS9RGfwPDxW.JIDCxyE.h./TIPBMC', 'c2', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:21:01.202328', '1', '2024-11-08 23:21:52.056686', 0, 0);
-INSERT INTO system_users VALUES (139, 'collector1', '$2a$04$Bvpe25vxihLdqmSVQsOJK.hB/DhfCq0d9OQHZNaCf9ljmNPLzoXhu', 'coll1', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:21:39.484555', '1', '2024-11-08 23:21:39.484555', 0, 0);
-INSERT INTO system_users VALUES (140, 'collector2', '$2a$04$P2SUI1ZYszSEWxWqkSxasOkZhTQ7yUJ0n7ab1CrRBSfIhP3HyeVte', 'coll2', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:22:08.510448', '1', '2024-11-08 23:22:08.510448', 0, 0);
-INSERT INTO system_users VALUES (141, 'collector3', '$2a$04$.UgNNrwtkl4w4zLBfk2gtOUyxSNiNgeo92.CJs1KW/SGATXJ1.6a2', 'coll3', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:22:22.298936', '1', '2024-11-08 23:22:22.298936', 0, 0);
-INSERT INTO system_users VALUES (142, 'collector4', '$2a$04$INWEzORFyNTv5EL9uA.VR.rRJh1hScIX9J7e2fpUe6Tem7nuvIkv2', 'coll4', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:22:41.791811', '1', '2024-11-08 23:22:41.791811', 0, 0);
+INSERT INTO system_users VALUES (137, 'chenwb1', '$2a$04$lVzasMd4WxqFdeY2U125/uZTfrJcZSLCxlgLJD/Mvg32hA3A.1XVu', 'c1', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:20:21.530376', '1', '2024-11-08 23:20:21.530376', 0, 1);
+INSERT INTO system_users VALUES (138, 'chenwb2', '$2a$04$RXZ0vGXYl52Vg4z.QyS8c.JizS9RGfwPDxW.JIDCxyE.h./TIPBMC', 'c2', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:21:01.202328', '1', '2024-11-08 23:21:52.056686', 0, 1);
+INSERT INTO system_users VALUES (139, 'collector1', '$2a$04$Bvpe25vxihLdqmSVQsOJK.hB/DhfCq0d9OQHZNaCf9ljmNPLzoXhu', 'coll1', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:21:39.484555', '1', '2024-11-08 23:21:39.484555', 0, 1);
+INSERT INTO system_users VALUES (140, 'collector2', '$2a$04$P2SUI1ZYszSEWxWqkSxasOkZhTQ7yUJ0n7ab1CrRBSfIhP3HyeVte', 'coll2', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:22:08.510448', '1', '2024-11-08 23:22:08.510448', 0, 1);
+INSERT INTO system_users VALUES (141, 'collector3', '$2a$04$.UgNNrwtkl4w4zLBfk2gtOUyxSNiNgeo92.CJs1KW/SGATXJ1.6a2', 'coll3', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:22:22.298936', '1', '2024-11-08 23:22:22.298936', 0, 1);
+INSERT INTO system_users VALUES (142, 'collector4', '$2a$04$INWEzORFyNTv5EL9uA.VR.rRJh1hScIX9J7e2fpUe6Tem7nuvIkv2', 'coll4', '', NULL, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-08 23:22:41.791811', '1', '2024-11-08 23:22:41.791811', 0, 1);
 
 INSERT INTO system_users (id, username, password, nickname, remark, dept_id, post_ids, email, mobile, sex, avatar, status, login_ip, login_date, creator, create_time, updater, update_time, deleted, tenant_id) VALUES (1, 'admin', '$2a$10$mRMIYLDtRHlf6.9ipiqH1.Z.bh/R9dO9d5iHiGYPigi6r5KOoR2Wm', '芋道源码', '管理员', 103, '[1]', 'aoteman@126.com', '18818260277', 2, 'http://test.yudao.iocoder.cn/96c787a2ce88bf6d0ce3cd8b6cf5314e80e7703cd41bf4af8cd2e2909dbd6b6d.png', 0, '0:0:0:0:0:0:0:1', '2024-04-29 21:50:32', 'admin', '2021-01-05 17:03:47', NULL, '2024-04-29 21:50:32', '0', 1);
 INSERT INTO system_users (id, username, password, nickname, remark, dept_id, post_ids, email, mobile, sex, avatar, status, login_ip, login_date, creator, create_time, updater, update_time, deleted, tenant_id) VALUES (100, 'yudao', '$2a$10$11U48RhyJ5pSBYWSn12AD./ld671.ycSzJHbyrtpeoMeYiw31eo8a', '芋道', '不要吓我', 104, '[1]', 'yudao@iocoder.cn', '15601691300', 1, '', 1, '127.0.0.1', '2022-07-09 23:03:33', '', '2021-01-07 09:07:17', NULL, '2022-07-09 23:03:33', '0', 1);
