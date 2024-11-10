@@ -1,6 +1,9 @@
 ######################################################################
 # Build Tools
 
+.zip
+codegen*/
+
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
