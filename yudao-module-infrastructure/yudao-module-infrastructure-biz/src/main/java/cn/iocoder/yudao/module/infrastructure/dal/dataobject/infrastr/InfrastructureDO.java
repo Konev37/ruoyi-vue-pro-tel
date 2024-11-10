@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.infrastructure.dal.dataobject.infrastr;
 
+import cn.iocoder.yudao.framework.mybatis.core.dataobject.TelDO;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InfrastructureDO {
+public class InfrastructureDO extends TelDO {
 
     /**
      * 基础设施id

@@ -76,8 +76,8 @@ public class InfrastructureController {
 
     @GetMapping("/page")
     @Operation(summary = "获得基础设施分页")
-//    @PreAuthorize("@ss.hasPermission('base:infrastructure:query')")
-    @PermitAll
+    @PreAuthorize("@ss.hasPermission('base:infrastructure:query')")
+//    @PermitAll
     public CommonResult<PageResult<InfrastructureRespVO>> getInfrastructurePage(@Valid InfrastructurePageReqVO pageReqVO) {
         PageResult<InfrastructureDO> pageResult = infrastructureService.getInfrastructurePage(pageReqVO);
         return success(BeanUtils.toBean(pageResult, InfrastructureRespVO.class));

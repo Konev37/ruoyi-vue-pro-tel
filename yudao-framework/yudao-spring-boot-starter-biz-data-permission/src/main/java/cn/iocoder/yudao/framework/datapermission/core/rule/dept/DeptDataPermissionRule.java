@@ -8,6 +8,7 @@ import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.framework.common.util.json.JsonUtils;
 import cn.iocoder.yudao.framework.datapermission.core.rule.DataPermissionRule;
 import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
+import cn.iocoder.yudao.framework.mybatis.core.dataobject.TelDO;
 import cn.iocoder.yudao.framework.mybatis.core.util.MyBatisUtils;
 import cn.iocoder.yudao.framework.security.core.LoginUser;
 import cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils;
@@ -78,6 +79,14 @@ public class DeptDataPermissionRule implements DataPermissionRule {
      */
     private final Map<String, String> userColumns = new HashMap<>();
     /**
+     * 基于基础设施的表字段配置
+     * 一般情况下，每个表的部门编号字段是 area_id，通过该配置自定义。
+     *
+     * key：表名
+     * value：字段名
+     */
+    private final Map<String, String> areaColumns = new HashMap<>();
+    /**
      * 所有表名，是 {@link #deptColumns} 和 {@link #userColumns} 的合集
      */
     private final Set<String> TABLE_NAMES = new HashSet<>();
@@ -125,9 +134,10 @@ public class DeptDataPermissionRule implements DataPermissionRule {
         }
 
         // 情况三，拼接 Dept 和 User 的条件，最后组合
+        Expression areaExpression = buildAreaExpression(tableName, tableAlias, deptDataPermission.getDeptIds());
         Expression deptExpression = buildDeptExpression(tableName,tableAlias, deptDataPermission.getDeptIds());
         Expression userExpression = buildUserExpression(tableName, tableAlias, deptDataPermission.getSelf(), loginUser.getId());
-        if (deptExpression == null && userExpression == null) {
+        if (deptExpression == null && userExpression == null && areaExpression == null) {
             // TODO 芋艿：获得不到条件的时候，暂时不抛出异常，而是不返回数据
             log.warn("[getExpression][LoginUser({}) Table({}/{}) DeptDataPermission({}) 构建的条件为空]",
                     JsonUtils.toJsonString(loginUser), tableName, tableAlias, JsonUtils.toJsonString(deptDataPermission));
@@ -135,14 +145,33 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 //                    loginUser.getId(), tableName, tableAlias.getName()));
             return EXPRESSION_NULL;
         }
-        if (deptExpression == null) {
+        if (deptExpression == null && userExpression == null) {
+            return areaExpression;
+        }
+        if (deptExpression == null && areaExpression == null) {
             return userExpression;
         }
-        if (userExpression == null) {
+        if (userExpression == null && areaExpression == null) {
             return deptExpression;
         }
         // 目前，如果有指定部门 + 可查看自己，采用 OR 条件。即，WHERE (dept_id IN ? OR user_id = ?)
         return new ParenthesedExpressionList(new OrExpression(deptExpression, userExpression));
+    }
+
+    private Expression buildAreaExpression(String tableName, Alias tableAlias, Set<Long> areaIds) {
+        // 如果不存在配置，则无需作为条件
+        String columnName = areaColumns.get(tableName);
+        if (StrUtil.isEmpty(columnName)) {
+            return null;
+        }
+        // 如果为空，则无条件
+        if (CollUtil.isEmpty(areaIds)) {
+            return null;
+        }
+        // 拼接条件
+        return new InExpression(MyBatisUtils.buildColumn(tableName, tableAlias, columnName),
+                // Parenthesis 的目的，是提供 (1,2,3) 的 () 左右括号
+                new ParenthesedExpressionList(new ExpressionList<LongValue>(CollectionUtils.convertList(areaIds, LongValue::new))));
     }
 
     private Expression buildDeptExpression(String tableName, Alias tableAlias, Set<Long> deptIds) {
@@ -201,6 +230,21 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 
     public void addUserColumn(String tableName, String columnName) {
         userColumns.put(tableName, columnName);
+        TABLE_NAMES.add(tableName);
+    }
+
+    // ==================== Area ====================
+    public void addAreaColumn(Class<? extends TelDO> entityClass) {
+        addAreaColumn(entityClass, DEPT_COLUMN_NAME);
+    }
+
+    public void addAreaColumn(Class<? extends TelDO> entityClass, String columnName) {
+        String tableName = TableInfoHelper.getTableInfo(entityClass).getTableName();
+        addAreaColumn(tableName, columnName);
+    }
+
+    public void addAreaColumn(String tableName, String columnName) {
+        areaColumns.put(tableName, columnName);
         TABLE_NAMES.add(tableName);
     }
 

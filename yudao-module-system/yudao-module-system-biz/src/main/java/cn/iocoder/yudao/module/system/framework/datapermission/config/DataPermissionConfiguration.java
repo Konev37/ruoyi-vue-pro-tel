@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.system.framework.datapermission.config;
 
+import cn.iocoder.yudao.module.infrastructure.dal.dataobject.infrastr.InfrastructureDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.yudao.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.yudao.framework.datapermission.core.rule.dept.DeptDataPermissionRuleCustomizer;
@@ -22,6 +23,8 @@ public class DataPermissionConfiguration {
             rule.addDeptColumn(DeptDO.class, "id");
             // user
             rule.addUserColumn(AdminUserDO.class, "id");
+            //infrastr
+            rule.addAreaColumn(InfrastructureDO.class, "area_id");
         };
     }
 
