@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         "${yudao.info.base-package}.module",
         "cn.iocoder.yudao.module.infrastructure",
         "cn.iocoder.yudao.module.fire",
+        "cn.iocoder.yudao.module.trash",
 })
 public class YudaoServerApplication {
 
