@@ -38,11 +38,6 @@ public class FireController {
     @Resource
     private FireService fireService;
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
     @PostMapping("/create")
     @Operation(summary = "创建消防栓")
     @PreAuthorize("@ss.hasPermission('infrastructure:fire:create')")
