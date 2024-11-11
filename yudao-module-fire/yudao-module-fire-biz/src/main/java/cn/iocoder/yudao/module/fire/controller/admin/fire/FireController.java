@@ -31,7 +31,7 @@ import cn.iocoder.yudao.module.fire.service.fire.FireService;
 
 @Tag(name = "管理后台 - 消防栓")
 @RestController
-@RequestMapping("/fire")
+@RequestMapping("/infrastructure/fire")
 @Validated
 public class FireController {
 

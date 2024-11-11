@@ -33,7 +33,7 @@ import cn.iocoder.yudao.module.infrastructure.service.infrastr.InfrastructureSer
 
 @Tag(name = "管理后台 - 基础设施")
 @RestController
-@RequestMapping("/infrastr")
+@RequestMapping("/infrastructure/infrastr")
 @Validated
 @Slf4j
 public class InfrastructureController {
