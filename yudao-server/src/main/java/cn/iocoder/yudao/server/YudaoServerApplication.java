@@ -17,7 +17,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = {
         "${yudao.info.base-package}.server",
         "${yudao.info.base-package}.module",
-        "cn.iocoder.yudao.module.infrastructure"
+        "cn.iocoder.yudao.module.infrastructure",
+        "cn.iocoder.yudao.module.fire",
 })
 public class YudaoServerApplication {
 
