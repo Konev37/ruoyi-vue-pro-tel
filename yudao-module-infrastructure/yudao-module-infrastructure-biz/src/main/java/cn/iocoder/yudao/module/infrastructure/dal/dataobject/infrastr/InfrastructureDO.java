@@ -17,7 +17,7 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
  * @author Bagration C
  */
 @TableName("infrastructure")
-@KeySequence("infrastructure_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
+@KeySequence("infrastructure_id_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
