@@ -58,7 +58,7 @@ public class InfrastructureDO extends TelDO {
     /**
      * 建设时间
      */
-    private LocalDate constructionDate;
+    private LocalDateTime constructionDate;
     /**
      * 区域id
      */

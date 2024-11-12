@@ -38,7 +38,7 @@ public class InfrastructureSaveReqVO {
     private BigDecimal latitude;
 
     @Schema(description = "建设时间")
-    private LocalDate constructionDate;
+    private LocalDateTime constructionDate;
 
     @Schema(description = "区域id", example = "100")
     private Integer areaId;

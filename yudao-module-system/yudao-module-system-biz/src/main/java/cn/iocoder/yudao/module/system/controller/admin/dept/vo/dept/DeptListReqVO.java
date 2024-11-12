@@ -6,7 +6,7 @@ import lombok.Data;
 @Schema(description = "管理后台 - 部门列表 Request VO")
 @Data
 public class DeptListReqVO {
-    @Schema(description = "部门id，模糊匹配", example = "100")
+    @Schema(description = "部门id，等值匹配", example = "100")
     private Long id;
 
     @Schema(description = "部门名称，模糊匹配", example = "芋道")

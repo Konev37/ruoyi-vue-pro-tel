@@ -40,8 +40,8 @@ public class InfrastructurePageReqVO extends PageParam {
     private BigDecimal latitude;
 
     @Schema(description = "建设时间")
-    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    private LocalDate[] constructionDate;
+//    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime constructionDate;
 
     @Schema(description = "区域id", example = "100")
     private Integer areaId;

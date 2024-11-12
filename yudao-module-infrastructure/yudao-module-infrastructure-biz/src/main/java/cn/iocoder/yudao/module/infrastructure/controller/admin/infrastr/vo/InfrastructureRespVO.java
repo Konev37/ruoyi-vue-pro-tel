@@ -45,7 +45,7 @@ public class InfrastructureRespVO {
 
     @Schema(description = "建设时间")
     @ExcelProperty("建设时间")
-    private LocalDate constructionDate;
+    private LocalDateTime constructionDate;
 
     @Schema(description = "区域id", example = "100")
     @ExcelProperty("区域id")

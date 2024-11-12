@@ -31,12 +31,13 @@ public interface AdminUserMapper extends BaseMapperX<AdminUserDO> {
 
     default PageResult<AdminUserDO> selectPage(UserPageReqVO reqVO, Collection<Long> deptIds) {
         return selectPage(reqVO, new LambdaQueryWrapperX<AdminUserDO>()
+                .eqIfPresent(AdminUserDO::getId, reqVO.getId())
                 .likeIfPresent(AdminUserDO::getUsername, reqVO.getUsername())
                 .likeIfPresent(AdminUserDO::getMobile, reqVO.getMobile())
                 .eqIfPresent(AdminUserDO::getStatus, reqVO.getStatus())
                 .betweenIfPresent(AdminUserDO::getCreateTime, reqVO.getCreateTime())
                 .inIfPresent(AdminUserDO::getDeptId, deptIds)
-                .orderByDesc(AdminUserDO::getId));
+                .orderByAsc(AdminUserDO::getId));
     }
 
     default List<AdminUserDO> selectListByNickname(String nickname) {
