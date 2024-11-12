@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import com.alibaba.excel.annotation.*;
 
@@ -22,7 +23,7 @@ public class FireRespVO {
 
     @Schema(description = "维护日期")
     @ExcelProperty("维护日期")
-    private LocalDate maintenanceDate;
+    private LocalDateTime maintenanceDate;
 
     @Schema(description = "维护人")
     @ExcelProperty("维护人")

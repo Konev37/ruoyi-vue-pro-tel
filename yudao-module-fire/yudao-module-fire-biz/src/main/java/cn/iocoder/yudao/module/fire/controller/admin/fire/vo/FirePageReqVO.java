@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.fire.controller.admin.fire.vo;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
@@ -23,8 +24,8 @@ public class FirePageReqVO extends PageParam {
     private Integer infrastructureId;
 
     @Schema(description = "维护日期")
-    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
-    private LocalDate[] maintenanceDate;
+//    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime maintenanceDate;
 
     @Schema(description = "维护人")
     private String maintainer;

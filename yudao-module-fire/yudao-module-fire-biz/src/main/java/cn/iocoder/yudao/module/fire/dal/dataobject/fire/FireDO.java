@@ -4,6 +4,7 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.TelDO;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
@@ -14,7 +15,7 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
  * @author Bagration C
  */
 @TableName("fire_hydrant")
-@KeySequence("fire_hydrant_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
+@KeySequence("fire_hydrant_extension_id_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -35,7 +36,7 @@ public class FireDO extends TelDO {
     /**
      * 维护日期
      */
-    private LocalDate maintenanceDate;
+    private LocalDateTime maintenanceDate;
     /**
      * 维护人
      */

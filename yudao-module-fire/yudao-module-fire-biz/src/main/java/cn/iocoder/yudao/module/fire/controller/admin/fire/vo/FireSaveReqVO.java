@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.validation.constraints.*;
 
@@ -18,7 +19,7 @@ public class FireSaveReqVO {
     private Integer infrastructureId;
 
     @Schema(description = "维护日期")
-    private LocalDate maintenanceDate;
+    private LocalDateTime maintenanceDate;
 
     @Schema(description = "维护人")
     private String maintainer;
