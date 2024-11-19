@@ -40,14 +40,14 @@ public class FireController {
 
     @PostMapping("/create")
     @Operation(summary = "创建消防栓")
-    @PreAuthorize("@ss.hasPermission('infrastructure:fire:create')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:fire:create')")
     public CommonResult<Integer> createFire(@Valid @RequestBody FireSaveReqVO createReqVO) {
         return success(fireService.createFire(createReqVO));
     }
 
     @PutMapping("/update")
     @Operation(summary = "更新消防栓")
-    @PreAuthorize("@ss.hasPermission('infrastructure:fire:update')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:fire:update')")
     public CommonResult<Boolean> updateFire(@Valid @RequestBody FireSaveReqVO updateReqVO) {
         fireService.updateFire(updateReqVO);
         return success(true);
@@ -56,7 +56,7 @@ public class FireController {
     @DeleteMapping("/delete")
     @Operation(summary = "删除消防栓")
     @Parameter(name = "id", description = "编号", required = true)
-    @PreAuthorize("@ss.hasPermission('infrastructure:fire:delete')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:fire:delete')")
     public CommonResult<Boolean> deleteFire(@RequestParam("id") Integer id) {
         fireService.deleteFire(id);
         return success(true);
@@ -65,7 +65,7 @@ public class FireController {
     @GetMapping("/get")
     @Operation(summary = "获得消防栓")
     @Parameter(name = "id", description = "编号", required = true, example = "1024")
-    @PreAuthorize("@ss.hasPermission('infrastructure:fire:query')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:fire:query')")
     public CommonResult<FireRespVO> getFire(@RequestParam("id") Integer id) {
         FireDO fire = fireService.getFire(id);
         return success(BeanUtils.toBean(fire, FireRespVO.class));
@@ -73,7 +73,7 @@ public class FireController {
 
     @GetMapping("/page")
     @Operation(summary = "获得消防栓分页")
-    @PreAuthorize("@ss.hasPermission('infrastructure:fire:query')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:fire:query')")
     public CommonResult<PageResult<FireRespVO>> getFirePage(@Valid FirePageReqVO pageReqVO) {
         PageResult<FireDO> pageResult = fireService.getFirePage(pageReqVO);
         return success(BeanUtils.toBean(pageResult, FireRespVO.class));
@@ -81,7 +81,7 @@ public class FireController {
 
     @GetMapping("/export-excel")
     @Operation(summary = "导出消防栓 Excel")
-    @PreAuthorize("@ss.hasPermission('infrastructure:fire:export')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:fire:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportFireExcel(@Valid FirePageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {

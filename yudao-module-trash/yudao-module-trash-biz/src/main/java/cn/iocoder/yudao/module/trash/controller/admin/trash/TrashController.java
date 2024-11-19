@@ -40,14 +40,14 @@ public class TrashController {
 
     @PostMapping("/create")
     @Operation(summary = "创建垃圾桶")
-    @PreAuthorize("@ss.hasPermission('infrastructure:trash:create')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:trash:create')")
     public CommonResult<Integer> createTrash(@Valid @RequestBody TrashSaveReqVO createReqVO) {
         return success(trashService.createTrash(createReqVO));
     }
 
     @PutMapping("/update")
     @Operation(summary = "更新垃圾桶")
-    @PreAuthorize("@ss.hasPermission('infrastructure:trash:update')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:trash:update')")
     public CommonResult<Boolean> updateTrash(@Valid @RequestBody TrashSaveReqVO updateReqVO) {
         trashService.updateTrash(updateReqVO);
         return success(true);
@@ -56,7 +56,7 @@ public class TrashController {
     @DeleteMapping("/delete")
     @Operation(summary = "删除垃圾桶")
     @Parameter(name = "id", description = "编号", required = true)
-    @PreAuthorize("@ss.hasPermission('infrastructure:trash:delete')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:trash:delete')")
     public CommonResult<Boolean> deleteTrash(@RequestParam("id") Integer id) {
         trashService.deleteTrash(id);
         return success(true);
@@ -65,7 +65,7 @@ public class TrashController {
     @GetMapping("/get")
     @Operation(summary = "获得垃圾桶")
     @Parameter(name = "id", description = "编号", required = true, example = "1024")
-    @PreAuthorize("@ss.hasPermission('infrastructure:trash:query')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:trash:query')")
     public CommonResult<TrashRespVO> getTrash(@RequestParam("id") Integer id) {
         TrashDO trash = trashService.getTrash(id);
         return success(BeanUtils.toBean(trash, TrashRespVO.class));
@@ -73,7 +73,7 @@ public class TrashController {
 
     @GetMapping("/page")
     @Operation(summary = "获得垃圾桶分页")
-    @PreAuthorize("@ss.hasPermission('infrastructure:trash:query')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:trash:query')")
     public CommonResult<PageResult<TrashRespVO>> getTrashPage(@Valid TrashPageReqVO pageReqVO) {
         PageResult<TrashDO> pageResult = trashService.getTrashPage(pageReqVO);
         return success(BeanUtils.toBean(pageResult, TrashRespVO.class));
@@ -81,7 +81,7 @@ public class TrashController {
 
     @GetMapping("/export-excel")
     @Operation(summary = "导出垃圾桶 Excel")
-    @PreAuthorize("@ss.hasPermission('infrastructure:trash:export')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:trash:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportTrashExcel(@Valid TrashPageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {

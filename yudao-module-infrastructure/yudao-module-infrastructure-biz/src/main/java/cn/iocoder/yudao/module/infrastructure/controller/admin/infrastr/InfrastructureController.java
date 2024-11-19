@@ -43,14 +43,14 @@ public class InfrastructureController {
 
     @PostMapping("/create")
     @Operation(summary = "创建基础设施")
-    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:create')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:create')")
     public CommonResult<Integer> createInfrastructure(@Valid @RequestBody InfrastructureSaveReqVO createReqVO) {
         return success(infrastructureService.createInfrastructure(createReqVO));
     }
 
     @PutMapping("/update")
     @Operation(summary = "更新基础设施")
-    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:update')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:update')")
     public CommonResult<Boolean> updateInfrastructure(@Valid @RequestBody InfrastructureSaveReqVO updateReqVO) {
         infrastructureService.updateInfrastructure(updateReqVO);
         return success(true);
@@ -59,7 +59,7 @@ public class InfrastructureController {
     @DeleteMapping("/delete")
     @Operation(summary = "删除基础设施")
     @Parameter(name = "id", description = "编号", required = true)
-    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:delete')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:delete')")
     public CommonResult<Boolean> deleteInfrastructure(@RequestParam("id") Integer id) {
         infrastructureService.deleteInfrastructure(id);
         return success(true);
@@ -68,7 +68,7 @@ public class InfrastructureController {
     @GetMapping("/get")
     @Operation(summary = "获得基础设施")
     @Parameter(name = "id", description = "编号", required = true, example = "1024")
-    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:query')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:query')")
     public CommonResult<InfrastructureRespVO> getInfrastructure(@RequestParam("id") Integer id) {
         InfrastructureDO infrastructure = infrastructureService.getInfrastructure(id);
         return success(BeanUtils.toBean(infrastructure, InfrastructureRespVO.class));
@@ -76,7 +76,7 @@ public class InfrastructureController {
 
     @GetMapping("/page")
     @Operation(summary = "获得基础设施分页")
-    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:query')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:query')")
 //    @PermitAll
     public CommonResult<PageResult<InfrastructureRespVO>> getInfrastructurePage(@Valid InfrastructurePageReqVO pageReqVO) {
         PageResult<InfrastructureDO> pageResult = infrastructureService.getInfrastructurePage(pageReqVO);
@@ -85,7 +85,7 @@ public class InfrastructureController {
 
     @GetMapping("/export-excel")
     @Operation(summary = "导出基础设施 Excel")
-    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:export')")
+//    @PreAuthorize("@ss.hasPermission('infrastructure:infrastr:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportInfrastructureExcel(@Valid InfrastructurePageReqVO pageReqVO,
               HttpServletResponse response) throws IOException {
