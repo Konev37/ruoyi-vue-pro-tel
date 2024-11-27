@@ -40,11 +40,11 @@ public class InfrastructureSaveReqVO {
     @Schema(description = "建设时间")
     private LocalDateTime constructionDate;
 
-    @Schema(description = "区域id", example = "100")
-    private Integer areaId;
+    @Schema(description = "区域名称", example = "禅城")
+    private String areaName;
 
-    @Schema(description = "创建人id", example = "137")
-    private Integer creatorId;
+    @Schema(description = "创建人名称", example = "小明")
+    private String creatorName;
 
     @Schema(description = "创建时间")
     private LocalDateTime createdAt;

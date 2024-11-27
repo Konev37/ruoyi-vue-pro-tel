@@ -26,8 +26,8 @@ public interface InfrastructureMapper extends BaseMapperX<InfrastructureDO> {
                 .eqIfPresent(InfrastructureDO::getLatitude, reqVO.getLatitude())
 //                .betweenIfPresent(InfrastructureDO::getConstructionDate, reqVO.getConstructionDate())
                 .eqIfPresent(InfrastructureDO::getConstructionDate, reqVO.getConstructionDate())
-                .eqIfPresent(InfrastructureDO::getAreaId, reqVO.getAreaId())
-                .eqIfPresent(InfrastructureDO::getCreatorId, reqVO.getCreatorId())
+                .eqIfPresent(InfrastructureDO::getAreaName, reqVO.getAreaName())
+                .eqIfPresent(InfrastructureDO::getCreatorName, reqVO.getCreatorName())
                 .eqIfPresent(InfrastructureDO::getCreatedAt, reqVO.getCreatedAt())
                 .orderByAsc(InfrastructureDO::getId));
     }

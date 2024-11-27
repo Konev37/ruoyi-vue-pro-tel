@@ -60,13 +60,13 @@ public class InfrastructureDO extends TelDO {
      */
     private LocalDateTime constructionDate;
     /**
-     * 区域id
+     * 区域名称
      */
-    private Integer areaId;
+    private String areaName;
     /**
-     * 创建人id
+     * 创建人名称
      */
-    private Integer creatorId;
+    private String creatorName;
     /**
      * 创建时间
      */

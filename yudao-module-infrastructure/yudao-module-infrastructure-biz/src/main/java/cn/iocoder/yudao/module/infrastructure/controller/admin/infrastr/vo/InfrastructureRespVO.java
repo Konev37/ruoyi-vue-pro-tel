@@ -47,13 +47,13 @@ public class InfrastructureRespVO {
     @ExcelProperty("建设时间")
     private LocalDateTime constructionDate;
 
-    @Schema(description = "区域id", example = "100")
-    @ExcelProperty("区域id")
-    private Integer areaId;
+    @Schema(description = "区域名称", example = "禅城")
+    @ExcelProperty("区域名称")
+    private String areaName;
 
-    @Schema(description = "创建人id", example = "137")
-    @ExcelProperty("创建人id")
-    private Integer creatorId;
+    @Schema(description = "创建人名称", example = "小明")
+    @ExcelProperty("创建人名称")
+    private String creatorName;
 
     @Schema(description = "创建时间")
     @ExcelProperty("创建时间")
