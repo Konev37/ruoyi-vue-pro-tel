@@ -37,6 +37,7 @@ import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
+import static cn.iocoder.yudao.framework.security.core.util.RSAUtil.decryptByPrivateKey;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.*;
 
 /**
@@ -98,7 +99,15 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         validateCaptcha(reqVO);
 
         // 使用账号密码，进行登录
-        AdminUserDO user = authenticate(reqVO.getUsername(), reqVO.getPassword());
+        // TODO 密码长度不符合规范返回400
+        String password = reqVO.getPassword();
+        String rawPassword;
+        try {
+            rawPassword = decryptByPrivateKey(password, null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        AdminUserDO user = authenticate(reqVO.getUsername(), rawPassword);
 
         // 如果 socialType 非空，说明需要绑定社交用户
         if (reqVO.getSocialType() != null) {
