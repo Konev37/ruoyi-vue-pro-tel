@@ -12,7 +12,7 @@
  Target Server Version : 170000 (170000)
  File Encoding         : 65001
 
- Date: 26/11/2024 17:21:39
+ Date: 27/11/2024 17:05:00
 */
 
 
@@ -1299,8 +1299,8 @@ CREATE TABLE "public"."infrastructure" (
   "longitude" numeric(9,6),
   "latitude" numeric(9,6),
   "construction_date" timestamp(0),
-  "area_id" int4,
-  "creator_id" int4,
+  "area_name" varchar(255) COLLATE "pg_catalog"."default",
+  "creator_name" varchar(255) COLLATE "pg_catalog"."default",
   "created_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP
 )
 ;
@@ -1312,22 +1312,22 @@ COMMENT ON COLUMN "public"."infrastructure"."address" IS '地址';
 COMMENT ON COLUMN "public"."infrastructure"."longitude" IS '经度';
 COMMENT ON COLUMN "public"."infrastructure"."latitude" IS '纬度';
 COMMENT ON COLUMN "public"."infrastructure"."construction_date" IS '建设时间';
-COMMENT ON COLUMN "public"."infrastructure"."area_id" IS '区域id';
-COMMENT ON COLUMN "public"."infrastructure"."creator_id" IS '创建人id';
+COMMENT ON COLUMN "public"."infrastructure"."area_name" IS '区域名称';
+COMMENT ON COLUMN "public"."infrastructure"."creator_name" IS '创建者名称';
 COMMENT ON COLUMN "public"."infrastructure"."created_at" IS '创建时间';
 COMMENT ON TABLE "public"."infrastructure" IS '基础设施表';
 
 -- ----------------------------
 -- Records of infrastructure
 -- ----------------------------
-INSERT INTO "public"."infrastructure" VALUES (7, '消防栓', 900, '消防设施配置4', '地址7', 34.456789, 108.456789, '2024-11-01 00:00:00', 109, 138, '2024-11-08 00:00:00');
-INSERT INTO "public"."infrastructure" VALUES (2, '垃圾桶', 50, '垃圾分类', '地址2', 35.123456, 109.123456, '2024-11-01 00:00:00', 103, 137, '2024-11-08 15:17:12.111');
-INSERT INTO "public"."infrastructure" VALUES (4, '垃圾桶', 60, '垃圾分类', '地址4', 35.234567, 109.234567, '2024-11-01 00:00:00', 104, 137, '2024-11-08 15:17:12.111');
-INSERT INTO "public"."infrastructure" VALUES (6, '垃圾桶', 55, '普通垃圾桶', '地址6', 35.345678, 109.345678, '2024-11-01 00:00:00', 108, 138, '2024-11-08 15:17:12.111');
-INSERT INTO "public"."infrastructure" VALUES (8, '垃圾桶', 65, '普通垃圾桶', '地址8', 35.456789, 109.456789, '2024-11-01 00:00:00', 109, 138, '2024-11-08 00:00:00');
-INSERT INTO "public"."infrastructure" VALUES (1, '消防栓', 1000, '消防设备配置1', '地址1', 34.123456, 108.123456, '2024-11-01 00:00:00', 103, 137, '2024-11-08 15:17:12.111');
-INSERT INTO "public"."infrastructure" VALUES (3, '消防栓', 1200, '消防设备配置2', '地址3', 34.234567, 108.234567, '2024-11-01 00:00:00', 104, 137, '2024-11-08 15:17:12.111');
-INSERT INTO "public"."infrastructure" VALUES (5, '消防栓', 1100, '消防设备配置3', '地址5', 34.345678, 108.345678, '2024-11-01 00:00:00', 108, 138, '2024-11-08 15:17:12.111');
+INSERT INTO "public"."infrastructure" VALUES (7, '消防栓', 900, '消防设施配置4', '地址7', 34.456789, 108.456789, '2024-11-01 00:00:00', '区域1-2-2', 'chenwb2', '2024-11-08 00:00:00');
+INSERT INTO "public"."infrastructure" VALUES (8, '垃圾桶', 65, '普通垃圾桶', '地址8', 35.456789, 109.456789, '2024-11-01 00:00:00', '区域1-2-2', 'chenwb2', '2024-11-08 00:00:00');
+INSERT INTO "public"."infrastructure" VALUES (6, '垃圾桶', 55, '普通垃圾桶', '地址6', 35.345678, 109.345678, '2024-11-01 00:00:00', '区域1-2-1', 'chenwb2', '2024-11-08 15:17:12.111');
+INSERT INTO "public"."infrastructure" VALUES (5, '消防栓', 1100, '消防设备配置3', '地址5', 34.345678, 108.345678, '2024-11-01 00:00:00', '区域1-2-1', 'chenwb2', '2024-11-08 15:17:12.111');
+INSERT INTO "public"."infrastructure" VALUES (4, '垃圾桶', 60, '垃圾分类', '地址4', 35.234567, 109.234567, '2024-11-01 00:00:00', '区域1-1-2', 'chenwb1', '2024-11-08 15:17:12.111');
+INSERT INTO "public"."infrastructure" VALUES (3, '消防栓', 1200, '消防设备配置2', '地址3', 34.234567, 108.234567, '2024-11-01 00:00:00', '区域1-1-2', 'chenwb1', '2024-11-08 15:17:12.111');
+INSERT INTO "public"."infrastructure" VALUES (2, '垃圾桶', 50, '垃圾分类', '地址2', 35.123456, 109.123456, '2024-11-01 00:00:00', '区域1-1-1', 'chenwb1', '2024-11-08 15:17:12.111');
+INSERT INTO "public"."infrastructure" VALUES (1, '消防栓', 1000, '消防设备配置1', '地址1', 34.123456, 108.123456, '2024-11-01 00:00:00', '区域1-1-1', 'chenwb1', '2024-11-08 15:17:12.111');
 
 -- ----------------------------
 -- Table structure for infrastructure_main
@@ -5153,6 +5153,7 @@ COMMENT ON TABLE "public"."system_users" IS '用户信息表';
 -- Records of system_users
 -- ----------------------------
 INSERT INTO "public"."system_users" VALUES (109, 'admin109', '$2a$10$JAqvH0tEc0I7dfDVBI7zyuB4E3j.uH6daIjV53.vUS6PknFkDJkuK', '芋艿', NULL, NULL, NULL, '', '15601691300', 0, '', 0, '', NULL, '1', '2022-02-20 23:11:50', '1', '2024-11-12 09:49:07.005704', 1, 120);
+INSERT INTO "public"."system_users" VALUES (111, 'test1', '$2a$10$mRMIYLDtRHlf6.9ipiqH1.Z.bh/R9dO9d5iHiGYPigi6r5KOoR2Wm', '测试用户', NULL, NULL, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2023-12-30 11:42:17', '110', '2022-02-23 13:14:33', '1', '2024-11-12 09:49:01.440865', 1, 121);
 INSERT INTO "public"."system_users" VALUES (142, 'collector4', '$2a$04$INWEzORFyNTv5EL9uA.VR.rRJh1hScIX9J7e2fpUe6Tem7nuvIkv2', 'coll4', '', 109, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-11-12 15:47:22.495323', '1', '2024-11-08 23:22:41.791811', NULL, '2024-11-12 15:47:22.495323', 0, 1);
 INSERT INTO "public"."system_users" VALUES (131, 'hh', '$2a$04$jyH9h6.gaw8mpOjPfHIpx.8as2Rzfcmdlj5rlJFwgCw4rsv/MTb2K', '呵呵', NULL, 100, '[]', '777@qq.com', '15601882312', 1, '', 0, '', NULL, '1', '2024-04-27 08:45:56', '1', '2024-11-12 09:48:32.01265', 1, 1);
 INSERT INTO "public"."system_users" VALUES (118, 'goudan', '$2a$04$OB1SuphCdiLVRpiYRKeqH.8NYS7UIp5vmIv1W7U4w6toiFeOAATVK', '狗蛋', NULL, 103, '[1]', '', '15601691239', 1, '', 0, '0:0:0:0:0:0:0:1', '2024-03-17 09:10:27', '1', '2022-07-09 17:44:43', '1', '2024-11-12 09:48:42.19888', 1, 1);
@@ -5160,21 +5161,20 @@ INSERT INTO "public"."system_users" VALUES (117, 'admin123', '$2a$10$WI8Gg/lpZQI
 INSERT INTO "public"."system_users" VALUES (115, 'aotemane', '$2a$04$GcyP0Vyzb2F2Yni5PuIK9ueGxM0tkZGMtDwVRwrNbtMvorzbpNsV2', '阿呆', '11222', 102, '[1,2]', '7648@qq.com', '15601691229', 2, '', 0, '', NULL, '1', '2022-04-30 02:55:43', '1', '2024-11-12 09:48:49.66201', 1, 1);
 INSERT INTO "public"."system_users" VALUES (114, 'hrmgr', '$2a$10$TR4eybBioGRhBmDBWkqWLO6NIh3mzYa8KBKDDB5woiGYFVlRAi.fu', 'hr 小姐姐', NULL, NULL, '[5]', '', '15601691236', 1, '', 0, '0:0:0:0:0:0:0:1', '2024-03-24 22:21:05', '1', '2022-03-19 21:50:58', '1', '2024-11-12 09:48:52.572234', 1, 1);
 INSERT INTO "public"."system_users" VALUES (113, 'aoteman', '$2a$10$0acJOIk2D25/oC87nyclE..0lzeu9DtQ/n3geP4fkun/zIVRhHJIO', '芋道', NULL, NULL, NULL, '', '15601691300', 0, '', 0, '127.0.0.1', '2022-03-19 18:38:51', '1', '2022-03-07 21:37:58', '1', '2024-11-12 09:48:55.431008', 1, 122);
-INSERT INTO "public"."system_users" VALUES (132, 'test', '$2a$04$f7b/KiAi5WbWqYknNHiEr.b4HgK.ZuBfJsAl4SMnFPijpKDkIOuYO', 'test', 'test', 110, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-12 10:31:09.686504', '137', '2024-11-17 16:51:00.419279', 0, 0);
 INSERT INTO "public"."system_users" VALUES (108, 'admin108', '$2a$10$y6mfvKoNYL1GXWak8nYwVOH.kCWqjactkzdoIDgiKl93WN3Ejg.Lu', '芋艿', NULL, NULL, NULL, '', '15601691300', 0, '', 0, '', NULL, '1', '2022-02-20 23:00:50', '1', '2024-11-12 09:49:09.902609', 1, 119);
 INSERT INTO "public"."system_users" VALUES (139, 'collector1', '$2a$04$Bvpe25vxihLdqmSVQsOJK.hB/DhfCq0d9OQHZNaCf9ljmNPLzoXhu', 'coll1', '', 103, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-11-19 14:55:13.060597', '1', '2024-11-08 23:21:39.484555', NULL, '2024-11-19 14:55:13.061595', 0, 1);
 INSERT INTO "public"."system_users" VALUES (112, 'newobject', '$2a$04$dB0z8Q819fJWz0hbaLe6B.VfHCjYgWx6LFfET5lyz3JwcqlyCkQ4C', '新对象', NULL, 100, '[]', '', '15601691235', 1, '', 0, '0:0:0:0:0:0:0:1', '2024-03-16 23:11:38', '1', '2022-02-23 19:08:03', '1', '2024-11-12 09:48:58.566032', 1, 1);
-INSERT INTO "public"."system_users" VALUES (111, 'test', '$2a$10$mRMIYLDtRHlf6.9ipiqH1.Z.bh/R9dO9d5iHiGYPigi6r5KOoR2Wm', '测试用户', NULL, NULL, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2023-12-30 11:42:17', '110', '2022-02-23 13:14:33', '1', '2024-11-12 09:49:01.440865', 1, 121);
 INSERT INTO "public"."system_users" VALUES (110, 'admin110', '$2a$10$mRMIYLDtRHlf6.9ipiqH1.Z.bh/R9dO9d5iHiGYPigi6r5KOoR2Wm', '小王', NULL, NULL, NULL, '', '15601691300', 0, '', 0, '127.0.0.1', '2022-09-25 22:47:33', '1', '2022-02-22 00:56:14', '1', '2024-11-12 09:49:04.598002', 1, 121);
 INSERT INTO "public"."system_users" VALUES (107, 'admin107', '$2a$10$dYOOBKMO93v/.ReCqzyFg.o67Tqk.bbc2bhrpyBGkIw9aypCtr2pm', '芋艿', NULL, NULL, NULL, '', '15601691300', 0, '', 0, '', NULL, '1', '2022-02-20 22:59:33', '1', '2024-11-12 09:49:17.235694', 1, 118);
 INSERT INTO "public"."system_users" VALUES (104, 'test', '$2a$04$KhExCYl7lx6eWWZYKsibKOZ8IBJRyuNuCcEOLQ11RYhJKgHmlSwK.', '测试号', NULL, 107, '[1,2]', '111@qq.com', '15601691200', 1, '', 0, '0:0:0:0:0:0:0:1', '2024-03-26 07:11:35', '', '2021-01-21 02:13:53', '1', '2024-11-12 09:49:20.191721', 1, 1);
 INSERT INTO "public"."system_users" VALUES (103, 'yuanma', '$2a$10$YMpimV4T6BtDhIaA8jSW.u8UTGBeGhc/qwXP4oxoMr4mOw9.qttt6', '源码', NULL, 106, NULL, 'yuanma@iocoder.cn', '15601701300', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-03-18 21:09:04', '', '2021-01-13 23:50:35', '1', '2024-11-12 09:49:22.670328', 1, 1);
 INSERT INTO "public"."system_users" VALUES (100, 'yudao', '$2a$10$11U48RhyJ5pSBYWSn12AD./ld671.ycSzJHbyrtpeoMeYiw31eo8a', '芋道', '不要吓我', 104, '[1]', 'yudao@iocoder.cn', '15601691300', 1, '', 1, '127.0.0.1', '2022-07-09 23:03:33', '', '2021-01-07 09:07:17', '1', '2024-11-12 09:49:25.041739', 1, 1);
-INSERT INTO "public"."system_users" VALUES (1, 'admin', '$2a$10$mRMIYLDtRHlf6.9ipiqH1.Z.bh/R9dO9d5iHiGYPigi6r5KOoR2Wm', 'admin', '管理员', 100, '[1]', '', '', 1, 'http://test.yudao.iocoder.cn/96c787a2ce88bf6d0ce3cd8b6cf5314e80e7703cd41bf4af8cd2e2909dbd6b6d.png', 0, '0:0:0:0:0:0:0:1', '2024-11-25 11:31:56.378741', 'admin', '2024-11-08 23:21:39.484555', NULL, '2024-11-25 11:31:56.382739', 0, 1);
+INSERT INTO "public"."system_users" VALUES (132, 'test2', '$2a$04$f7b/KiAi5WbWqYknNHiEr.b4HgK.ZuBfJsAl4SMnFPijpKDkIOuYO', 'test', 'test', 110, '[]', '', '', 0, '', 0, '', NULL, '1', '2024-11-12 10:31:09.686504', '137', '2024-11-17 16:51:00.419279', 0, 0);
 INSERT INTO "public"."system_users" VALUES (140, 'collector2', '$2a$04$P2SUI1ZYszSEWxWqkSxasOkZhTQ7yUJ0n7ab1CrRBSfIhP3HyeVte', 'coll2', '', 104, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-11-12 15:39:24.686778', '1', '2024-11-08 23:22:08.510448', '137', '2024-11-17 17:25:26.628796', 0, 1);
 INSERT INTO "public"."system_users" VALUES (141, 'collector3', '$2a$04$.UgNNrwtkl4w4zLBfk2gtOUyxSNiNgeo92.CJs1KW/SGATXJ1.6a2', 'coll3', '', 108, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-11-13 15:24:36.547432', '1', '2024-11-08 23:22:22.298936', '137', '2024-11-17 17:16:44.71244', 0, 1);
 INSERT INTO "public"."system_users" VALUES (138, 'chenwb2', '$2a$04$RXZ0vGXYl52Vg4z.QyS8c.JizS9RGfwPDxW.JIDCxyE.h./TIPBMC', 'c2', '', 102, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-11-12 15:38:53.899179', '1', '2024-11-08 23:21:01.202328', '137', '2024-11-17 17:16:53.140308', 0, 1);
 INSERT INTO "public"."system_users" VALUES (137, 'chenwb1', '$2a$04$lVzasMd4WxqFdeY2U125/uZTfrJcZSLCxlgLJD/Mvg32hA3A.1XVu', 'c1', '', 101, '[]', '', '', 0, '', 0, '0:0:0:0:0:0:0:1', '2024-11-19 14:46:27.321322', '1', '2024-11-08 23:20:21.530376', NULL, '2024-11-19 14:46:27.321322', 0, 1);
+INSERT INTO "public"."system_users" VALUES (1, 'admin', '$2a$10$mRMIYLDtRHlf6.9ipiqH1.Z.bh/R9dO9d5iHiGYPigi6r5KOoR2Wm', 'admin', '管理员', 100, '[1]', '', '', 1, 'http://test.yudao.iocoder.cn/96c787a2ce88bf6d0ce3cd8b6cf5314e80e7703cd41bf4af8cd2e2909dbd6b6d.png', 0, '0:0:0:0:0:0:0:1', '2024-11-27 14:37:02.694966', 'admin', '2024-11-08 23:21:39.484555', NULL, '2024-11-27 14:37:02.702128', 0, 1);
 
 -- ----------------------------
 -- Table structure for trash_can
@@ -5490,7 +5490,7 @@ SELECT setval('"public"."infra_api_access_log_seq"', 1, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-SELECT setval('"public"."infra_api_error_log_seq"', 120, true);
+SELECT setval('"public"."infra_api_error_log_seq"', 124, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -5562,7 +5562,7 @@ SELECT setval('"public"."system_dict_type_seq"', 620, true);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-SELECT setval('"public"."system_login_log_seq"', 388, true);
+SELECT setval('"public"."system_login_log_seq"', 400, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -5602,7 +5602,7 @@ SELECT setval('"public"."system_notify_template_seq"', 1, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-SELECT setval('"public"."system_oauth2_access_token_seq"', 587, true);
+SELECT setval('"public"."system_oauth2_access_token_seq"', 614, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -5764,8 +5764,8 @@ EXECUTE PROCEDURE "public"."insert_infrastructure_with_type"();
 -- ----------------------------
 -- Checks structure for table fire_hydrant
 -- ----------------------------
-ALTER TABLE "public"."fire_hydrant" ADD CONSTRAINT "fire_hydrant_extension_copy1_type_check" CHECK (type::text = ANY (ARRAY['手动泵'::character varying::text, '自动泵'::character varying::text]));
-ALTER TABLE "public"."fire_hydrant" ADD CONSTRAINT "fire_hydrant_extension_copy1_status_check" CHECK (status::text = ANY (ARRAY['使用中'::character varying::text, '空闲'::character varying::text, '损坏'::character varying::text, '维修中'::character varying::text]));
+ALTER TABLE "public"."fire_hydrant" ADD CONSTRAINT "fire_hydrant_type_check" CHECK (type::text = ANY (ARRAY['手动泵'::character varying::text, '自动泵'::character varying::text]));
+ALTER TABLE "public"."fire_hydrant" ADD CONSTRAINT "fire_hydrant_status_check" CHECK (status::text = ANY (ARRAY['使用中'::character varying::text, '空闲'::character varying::text, '损坏'::character varying::text, '维修中'::character varying::text]));
 
 -- ----------------------------
 -- Primary Key structure for table fire_hydrant
@@ -5864,6 +5864,12 @@ ALTER TABLE "public"."infrastructure_main" ADD CONSTRAINT "infrastructure_type_c
 -- Primary Key structure for table infrastructure_main
 -- ----------------------------
 ALTER TABLE "public"."infrastructure_main" ADD CONSTRAINT "infrastructure_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Uniques structure for table system_dept
+-- ----------------------------
+ALTER TABLE "public"."system_dept" ADD CONSTRAINT "unique_name" UNIQUE ("name");
+COMMENT ON CONSTRAINT "unique_name" ON "public"."system_dept" IS '部门（区域）名称是唯一的';
 
 -- ----------------------------
 -- Primary Key structure for table system_dept
@@ -6038,6 +6044,12 @@ ALTER TABLE "public"."system_user_post" ADD CONSTRAINT "pk_system_user_post" PRI
 ALTER TABLE "public"."system_user_role" ADD CONSTRAINT "pk_system_user_role" PRIMARY KEY ("id");
 
 -- ----------------------------
+-- Uniques structure for table system_users
+-- ----------------------------
+ALTER TABLE "public"."system_users" ADD CONSTRAINT "unique_username" UNIQUE ("username");
+COMMENT ON CONSTRAINT "unique_username" ON "public"."system_users" IS '用户名称需要唯一';
+
+-- ----------------------------
 -- Primary Key structure for table system_users
 -- ----------------------------
 ALTER TABLE "public"."system_users" ADD CONSTRAINT "pk_system_users" PRIMARY KEY ("id");
@@ -6055,7 +6067,7 @@ EXECUTE PROCEDURE "public"."insert_infrastructure_with_type"();
 -- ----------------------------
 -- Checks structure for table trash_can
 -- ----------------------------
-ALTER TABLE "public"."trash_can" ADD CONSTRAINT "trash_can_extension_copy1_status_check" CHECK (status::text = ANY (ARRAY['空闲'::character varying::text, '满载'::character varying::text, '损坏'::character varying::text, '维修中'::character varying::text]));
+ALTER TABLE "public"."trash_can" ADD CONSTRAINT "trash_can_status_check" CHECK (status::text = ANY (ARRAY['空闲'::character varying::text, '满载'::character varying::text, '损坏'::character varying::text, '维修中'::character varying::text]));
 
 -- ----------------------------
 -- Primary Key structure for table trash_can
@@ -6120,8 +6132,8 @@ ALTER TABLE "public"."fire_hydrant_extension" ADD CONSTRAINT "fire_hydrant_exten
 -- ----------------------------
 -- Foreign Keys structure for table infrastructure
 -- ----------------------------
-ALTER TABLE "public"."infrastructure" ADD CONSTRAINT "infrastructure_area_id_fkey" FOREIGN KEY ("area_id") REFERENCES "public"."system_dept" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."infrastructure" ADD CONSTRAINT "infrastructure_creator_id_fkey" FOREIGN KEY ("creator_id") REFERENCES "public"."system_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."infrastructure" ADD CONSTRAINT "infrastructure_area_name_fkey" FOREIGN KEY ("area_name") REFERENCES "public"."system_dept" ("name") ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE "public"."infrastructure" ADD CONSTRAINT "infrastructure_creator_name_fkey" FOREIGN KEY ("creator_name") REFERENCES "public"."system_users" ("username") ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- ----------------------------
 -- Foreign Keys structure for table infrastructure_main
@@ -6132,7 +6144,7 @@ ALTER TABLE "public"."infrastructure_main" ADD CONSTRAINT "infrastructure_creato
 -- ----------------------------
 -- Foreign Keys structure for table trash_can
 -- ----------------------------
-ALTER TABLE "public"."trash_can" ADD CONSTRAINT "trash_can_infrastructure_id_fkey" FOREIGN KEY ("infrastructure_id") REFERENCES "public"."infrastructure" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."trash_can" ADD CONSTRAINT "trash_can_infrastructure_id_fkey" FOREIGN KEY ("infrastructure_id") REFERENCES "public"."infrastructure" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
 -- Foreign Keys structure for table trash_can_extension
