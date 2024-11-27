@@ -99,7 +99,6 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         validateCaptcha(reqVO);
 
         // 使用账号密码，进行登录
-        // TODO 密码长度不符合规范返回400
         String password = reqVO.getPassword();
         String rawPassword;
         try {
@@ -107,6 +106,12 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        // 校验密码长度
+        if (rawPassword.length() < 4 || rawPassword.length() > 16) {
+            throw exception(AUTH_LOGIN_PASSWORD_LENGTH);
+        }
+
+        // 校验账号密码
         AdminUserDO user = authenticate(reqVO.getUsername(), rawPassword);
 
         // 如果 socialType 非空，说明需要绑定社交用户
